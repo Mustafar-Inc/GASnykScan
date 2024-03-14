@@ -15,28 +15,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@master
     - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
-
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
-      with:
-        languages: csharp
-
-    - name: Build TestCaseSupport
-      run: msbuild testcasesupport/TestCaseSupport/TestCaseSupport.csproj /p:Configuration=Debug /p:Platform=AnyCPU /p:UseSharedCompilation=false
-
-    - name: CWE643_Xpath_Injection
-      run: msbuild CWE643_Xpath_Injection\CWE643_Xpath_Injection.csproj /p:Configuration=Debug /p:Platform=AnyCPU /p:UseSharedCompilation=false
 
     - name: Run Snyk to check for vulnerabilities
       uses: snyk/actions/node@master
       env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-

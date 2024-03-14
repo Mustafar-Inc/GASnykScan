@@ -140,6 +140,8 @@ jobs:
     - name: CWE643_Xpath_Injection
       run: msbuild CWE643_Xpath_Injection\CWE643_Xpath_Injection.csproj /p:Configuration=Debug /p:Platform=AnyCPU /p:UseSharedCompilation=false
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/node@master
+      env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 

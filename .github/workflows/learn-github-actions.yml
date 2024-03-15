@@ -9,10 +9,10 @@ jobs:
  security:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@4.0.0
+        uses: actions/setup-dotnet@v4
 
       - name: Restore dependencies
         run: dotnet restore ./path/to/your.sln

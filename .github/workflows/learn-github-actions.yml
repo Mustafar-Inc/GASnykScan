@@ -5,12 +5,11 @@ on:
     branches:
       - master
 
-permissions:
- security-events: write
-
 jobs:
  security:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.SARIF_WRITE_PERMISSION }}
     steps:
       - uses: actions/checkout@v4
 
